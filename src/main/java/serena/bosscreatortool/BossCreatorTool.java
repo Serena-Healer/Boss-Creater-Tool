@@ -22,7 +22,7 @@ public class BossCreatorTool {
 
     public static final String MOD_ID = "bosscreatortool";
     public static final String MOD_NAME = "BossCreatorTool";
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.2";
 
     /**
      * This is the instance of your mod as created by Forge. It will never be null.

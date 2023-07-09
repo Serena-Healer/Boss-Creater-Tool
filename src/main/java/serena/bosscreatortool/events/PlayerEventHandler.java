@@ -4,6 +4,8 @@ import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBow;
@@ -104,6 +106,8 @@ public class PlayerEventHandler {
             });
             damage = (float) dmg_temp.get();
 
+            IAttributeInstance instance = ((EntityLivingBase)dealer).getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
+            damage *= (instance.getAttributeValue() / StatusHelper.getStrength((EntityLivingBase) dealer));
         }
 
         if(damage <= 0){
