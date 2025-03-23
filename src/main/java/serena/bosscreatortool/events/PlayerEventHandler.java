@@ -48,6 +48,11 @@ public class PlayerEventHandler {
         EnumDamageType damageType = DamageTypeHelper.getDamageType(type);
         Entity dealer = event.getSource().getTrueSource();
 
+        if(Float.isNaN(event.getEntityLiving().getHealth())){
+            event.getEntityLiving().setHealth(event.getEntityLiving().getMaxHealth());
+            damage = 0;
+        }
+
         //被弾時
         if(event.getEntity() instanceof EntityLivingBase){
 
@@ -72,7 +77,6 @@ public class PlayerEventHandler {
                     amplifier *= a;
                     amplifier += 100;
                     dmg_temp.set(dmg_temp.get() * amplifier / 100.0F);
-                    System.out.println(effect);
                 }
             });
             damage = (float) dmg_temp.get();
@@ -107,7 +111,13 @@ public class PlayerEventHandler {
             damage = (float) dmg_temp.get();
 
             IAttributeInstance instance = ((EntityLivingBase)dealer).getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE);
-            damage *= (instance.getAttributeValue() / StatusHelper.getStrength((EntityLivingBase) dealer));
+            if(instance != null) {
+                float k = (float) instance.getAttributeValue();
+                float l = StatusHelper.getStrength((EntityLivingBase) dealer);
+                if(k != 0) {
+                    damage *= (l / k);
+                }
+            }
         }
 
         if(damage <= 0){
@@ -117,7 +127,11 @@ public class PlayerEventHandler {
                 AssistHelper.contributeAttacking((EntityPlayer) dealer, event.getEntityLiving(), (int)Math.ceil(damage));
             }
 
-            damage *= (event.getEntityLiving().getMaxHealth() / StatusHelper.getEffectiveHealth(event.getEntityLiving()));
+            float k = event.getEntityLiving().getMaxHealth();
+            float l = StatusHelper.getEffectiveHealth(event.getEntityLiving());
+            if(l != 0) {
+                damage *= (k / l);
+            }
         }
 
         event.setAmount(damage);
@@ -129,8 +143,10 @@ public class PlayerEventHandler {
         if(event.getEntity() instanceof EntityPlayer){
             PlayerDataHandler data = CapabilityProvider.getPlayerData(event.getEntity());
         }else{
-            Entity source = event.getSource().getTrueSource();
-            if(!(source instanceof EntityPlayer))source = null;
+            if(event.getSource() != null) {
+                Entity source = event.getSource().getTrueSource();
+                if (!(source instanceof EntityPlayer)) source = null;
+            }
         }
     }
 
@@ -146,7 +162,7 @@ public class PlayerEventHandler {
                     if(effect != null){
                         int amplifier = effect.getAmplifier() + 1;
                         event.player.hurtResistantTime = 0;
-                        event.player.attackEntityFrom(new DamageSource(sources[i]), amplifier);
+                        event.player.attackEntityFrom(new DamageSource(sources[i]), amplifier + 1);
                         if(damagePots[i] == PotionHandler.FIRE){
                             if(!event.player.isBurning()){
                                 event.player.setFire(1);
@@ -168,9 +184,11 @@ public class PlayerEventHandler {
                 ItemStack item = event.getItemStack();
                 EntityPlayer player = event.getEntityPlayer();
                 PlayerDataHandler data = CapabilityProvider.getPlayerData(player);
+                /*
                 if(event instanceof PlayerInteractEvent.LeftClickEmpty && event.getSide() == Side.CLIENT){
                     PacketHandler.INSTANCE.sendToServer(new LeftClickPacket());
                 }
+                */
             }
         }
 

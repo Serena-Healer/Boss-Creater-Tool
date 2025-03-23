@@ -14,9 +14,6 @@ import serena.bosscreatortool.data.player.CapabilityProvider;
 import serena.bosscreatortool.data.player.PlayerDataHandler;
 import serena.bosscreatortool.entities.ICustomEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CapabilityEventHandler {
 
     @SubscribeEvent
@@ -50,7 +47,7 @@ public class CapabilityEventHandler {
     @SubscribeEvent
     public void onEntityTick(TickEvent.WorldTickEvent event){
         if(event.phase == TickEvent.Phase.END) {
-            event.world.getLoadedEntityList().forEach(e -> {
+            event.world.getEntities(Entity.class, entity -> true).forEach(e -> {
                 EntityDataHandler data = EntityCapabilityProvider.getEntityData(e);
                 if (data != null) {
                     data.onTick();

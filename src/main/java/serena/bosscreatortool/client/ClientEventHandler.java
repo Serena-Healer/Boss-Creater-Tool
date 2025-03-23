@@ -26,7 +26,7 @@ public class ClientEventHandler {
         int height = event.getResolution().getScaledHeight();
         FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
         PlayerDataHandler data = CapabilityProvider.getPlayerData(Minecraft.getMinecraft().player);
-        if(event.getType() == RenderGameOverlayEvent.ElementType.ARMOR)event.setCanceled(true);
+        //if(event.getType() == RenderGameOverlayEvent.ElementType.ARMOR)event.setCanceled(true);
         if(event.getType() == RenderGameOverlayEvent.ElementType.HEALTH){
             //描画処理
             renderer.drawString("", 0, 0, -1);

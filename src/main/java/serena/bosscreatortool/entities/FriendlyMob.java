@@ -2,12 +2,7 @@ package serena.bosscreatortool.entities;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityIronGolem;
-import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -16,15 +11,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public abstract class PlayerShapedFriendly extends EntitySkeleton implements IEntityBase {
+public abstract class FriendlyMob extends EntitySkeleton implements IEntityBase {
 
-    public PlayerShapedFriendly(World worldIn) {
+    public FriendlyMob(World worldIn) {
         super(worldIn);
         this.setHeldItem(EnumHand.MAIN_HAND,ItemStack.EMPTY);
         this.isImmuneToFire = true;

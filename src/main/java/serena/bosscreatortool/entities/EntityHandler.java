@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import serena.bosscreatortool.BossCreatorTool;
+import serena.bosscreatortool.entities.instance.WhiteGarden;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,17 @@ public class EntityHandler {
     public static List<Class<? extends IEntityBase>> allEntities = new ArrayList<>();
 
     public static void init(){
-        //register("serena", EntityHealer.class);
+        register("white_garden", WhiteGarden.class);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void registerModels(){
+        playerEntityRender("white_garden", WhiteGarden.class, true);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void playerEntityRender(String key, Class<? extends EntityLiving> c, boolean slim){
+        RenderingRegistry.registerEntityRenderingHandler(c, manager -> new PlayerBasedRenderer(manager,key,slim));
     }
 
     public static Class<? extends IEntityBase> register(String name, Class<? extends IEntityBase> entity){
@@ -27,13 +38,4 @@ public class EntityHandler {
         return entity;
     }
 
-    @SideOnly(Side.CLIENT)
-    public static void registerModels(){
-        //playerEntityRender("serena", EntityHealer.class, true);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void playerEntityRender(String key, Class<? extends EntityLiving> c, boolean slim){
-        RenderingRegistry.registerEntityRenderingHandler(c, manager -> new PlayerBasedRenderer(manager,key,slim));
-    }
 }

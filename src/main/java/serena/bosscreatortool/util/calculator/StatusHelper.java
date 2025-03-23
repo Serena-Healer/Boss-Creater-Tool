@@ -23,7 +23,7 @@ public class StatusHelper {
         });
         if(ret.get() != 0)return ret.get();
 
-        if(entity instanceof ICustomEntity)return ((ICustomEntity) entity).getEffectiveHealth();
+        if(entity instanceof ICustomEntity)return (float) ((ICustomEntity) entity).getEffectiveHealth();
 
         return entity.getMaxHealth();
     }

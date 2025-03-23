@@ -21,6 +21,10 @@ public class PotionHandler {
     public static Potion DAMAGE_TRUE_2 = new ForcedDamagePotionBase("true_2", true, 1, 0, 0, 10, "void");
     public static Potion DAMAGE_TRUE_3 = new ForcedDamagePotionBase("true_3", true, 1, 0, 0, 100, "void");
     public static Potion DAMAGE_TRUE_4 = new ForcedDamagePotionBase("true_4", true, 1, 0, 0, 1000, "void");
+    public static Potion DAMAGE_PIERCE_1 = new TrueDamagePotionBase("pierce_1", true, 1, 0, 0, 1, "void");
+    public static Potion DAMAGE_PIERCE_2 = new TrueDamagePotionBase("pierce_2", true, 1, 0, 0, 10, "void");
+    public static Potion DAMAGE_PIERCE_3 = new TrueDamagePotionBase("pierce_3", true, 1, 0, 0, 100, "void");
+    public static Potion DAMAGE_PIERCE_4 = new TrueDamagePotionBase("pierce_4", true, 1, 0, 0, 1000, "void");
 
     public static Potion HEAL_1 = new HealingPotionBase("heal_1", false, 1, 0, 0, 1, "heal");
     public static Potion HEAL_2 = new HealingPotionBase("heal_2", false, 1, 0, 0, 10, "heal");
@@ -59,6 +63,10 @@ public class PotionHandler {
         ForgeRegistries.POTIONS.register(DAMAGE_TRUE_2);
         ForgeRegistries.POTIONS.register(DAMAGE_TRUE_3);
         ForgeRegistries.POTIONS.register(DAMAGE_TRUE_4);
+        ForgeRegistries.POTIONS.register(DAMAGE_PIERCE_1);
+        ForgeRegistries.POTIONS.register(DAMAGE_PIERCE_2);
+        ForgeRegistries.POTIONS.register(DAMAGE_PIERCE_3);
+        ForgeRegistries.POTIONS.register(DAMAGE_PIERCE_4);
         ForgeRegistries.POTIONS.register(HEAL_1);
         ForgeRegistries.POTIONS.register(HEAL_2);
         ForgeRegistries.POTIONS.register(HEAL_3);

@@ -2,7 +2,8 @@ package serena.bosscreatortool.entities;
 
 public interface ICustomEntity {
 
-    public int getEffectiveHealth();
+    double getEffectiveHealth();
+    double getAttackDamage();
     void onTick();
 
 }

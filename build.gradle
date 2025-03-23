@@ -4,7 +4,7 @@ plugins {
 
 
 group = 'serena'
-version = '0.2'
+version = '0.2.3'
 
 java {
     archivesBaseName = 'bosscreatortool'
